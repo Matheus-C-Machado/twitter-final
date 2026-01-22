@@ -1,16 +1,18 @@
+# core/settings.py
 import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# -----------------------------
+# PATHS
+# -----------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # -----------------------------
 # SECURITY
 # -----------------------------
-# Use SECRET_KEY via variável de ambiente para produção
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-temporaria')
 
-# DEBUG desligado em produção
+# DEBUG deve ser False em produção
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # Hosts permitidos
@@ -26,7 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'twitter',  # seu app principal
+    'twitter',
 ]
 
 MIDDLEWARE = [
@@ -45,7 +47,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # adicionar templates personalizados se houver
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,23 +94,23 @@ USE_I18N = True
 USE_TZ = True
 
 # -----------------------------
-# STATIC FILES (CSS, JS, Imagens)
+# STATIC FILES
 # -----------------------------
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # -----------------------------
-# MEDIA FILES (Uploads)
+# MEDIA FILES
 # -----------------------------
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # -----------------------------
-# USER AUTHENTICATION
+# AUTH USER
 # -----------------------------
-AUTH_USER_MODEL = 'twitter.User'  # caso tenha user customizado
+AUTH_USER_MODEL = 'twitter.User'  # se tiver custom user
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
+
