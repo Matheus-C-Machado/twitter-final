@@ -2,16 +2,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.http import JsonResponse  # import necessário para o health check
+from django.http import JsonResponse
 
-# Health check endpoint
+# Health check endpoint (Render, Vercel, etc.)
 def healthz(request):
     return JsonResponse({"status": "ok"})
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('twitter.urls')),  # rotas do seu app
-    path('healthz', healthz),          # endpoint para Render
+    path('', include('twitter.urls')),  # suas rotas principais
+    path('healthz/', healthz),          # note a barra final
 ]
 
 if settings.DEBUG:
